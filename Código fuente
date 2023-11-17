@@ -1,0 +1,24 @@
+import dialogflow
+
+API_KEY = "tu-codigo-api"
+
+def saludar():
+    print("Hola, soy el Asistente HumWinDroit, un chatbot impulsado por la IA de Google. ¿En qué puedo ayudarte?")
+
+def responder_pregunta(pregunta):
+    try:
+        response = dialogflow.Agent(API_KEY).query(pregunta)
+        return response.fulfillment_text
+    except dialogflow.exceptions.InvalidArgumentError:
+        return "No entiendo tu pregunta. ¿Puedes reformularla?"
+
+def main():
+    saludar()
+    while True:
+        pregunta = input("¿Qué quieres preguntarme? ")
+        respuesta = responder_pregunta(pregunta)
+        print(respuesta)
+    despedirse()
+
+if __name__ == "__main__":
+    main()
